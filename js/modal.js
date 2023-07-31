@@ -71,7 +71,7 @@ function checkFirstName() {
   }
   else {
     firstName.style.display = "block";
-    firstName.innerHTML = "Veuillez rentrer deux caractères minimum";
+    firstName.innerHTML = "Veuillez rentrer deux caractères minimum et/ou un prénom valide";
     firstNameValid.style.border = "2px solid red";
     return false
   }
@@ -91,7 +91,7 @@ function checkName() {
   } else {
 
     lastName.style.display = "block";
-    lastName.innerHTML = "Veuillez rentrer deux caractères minimum";
+    lastName.innerHTML = "Veuillez rentrer deux caractères minimum et/ou un nom valide";
     nameValid.style.border = "2px solid red";
     return false
   }
@@ -147,7 +147,7 @@ function checkCup() {
     return true
   } else {
     cup.style.display = "block";
-    cup.innerHTML = "Nombre ou donnée incorecte";
+    cup.innerHTML = "Nombre ou donnée incorrecte";
     concoursValid.style.border = "2px solid red";
     return false
   }
@@ -194,15 +194,10 @@ function validate() {
     console.log(checkBirth)
     return
   } else {
-    alert("faux");
+    alert("Votre formulaire est incomplet ou des données sont incorrectes");
   }
 }
 
-
-function listing() {
-  if (validate())
-    console.log('ok')
-}
 
 
 
