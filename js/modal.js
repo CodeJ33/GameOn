@@ -34,9 +34,6 @@ function closeModal() {
 
 // Retrieve form fields
 
-const firstNameValid = document.getElementById('first');
-const nameValid = document.getElementById('last');
-const mailValid = document.getElementById('email');
 const birthValid = document.getElementById('birthdate');
 const concoursValid = document.getElementById('quantity');
 const condButtonRequiredv = document.getElementById('checkbox1');
@@ -47,24 +44,30 @@ const mail = document.getElementById('mail');
 const cup = document.getElementById('cup');
 const conditions = document.getElementById('conditions');
 
-// Regex 
-const nameRegex = /^[a-zA-Z-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]{2,30}$/;
-const mailRegex = /^\S+@\S+\.\S+$/;
-const birthRegex = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
-const competitionRegex = /^[0-9]+$/;
-
-// check firstname
 
 
 firstName.innerHTML = "";
-firstNameValid.addEventListener('change', () => {
+lastName.innerHTML = "";
+birth.innerHTML = "";
+mail.innerHTML = "";
+location.innerHTML = "";
+cup.innerHTML = "";
+conditions.innerHtml = "";
+condButtonRequiredv.checked === false;
 
 
+let firstNamesubmit = ""
 
+
+// check firstname
+function checkFirstName() {
+
+  const firstNameValid = document.getElementById('first');
+  const nameRegex = /^[a-zA-Z-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]{2,30}$/;
   if (nameRegex.test(firstNameValid.value) === true) {
     firstName.style.display = "none";
     firstNameValid.style.border = "6px solid #279e7a";
-    return true;
+    return true
   }
   else {
     firstName.style.display = "block";
@@ -72,17 +75,19 @@ firstNameValid.addEventListener('change', () => {
     firstNameValid.style.border = "2px solid red";
     return false
   }
-})
+}
+
 
 // check name
-lastName.innerHTML = "";
 
-nameValid.addEventListener('change', () => {
+function checkName() {
+  const nameValid = document.getElementById('last');
+  const nameRegex = /^[a-zA-Z-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]{2,30}$/;
 
   if (nameRegex.test(nameValid.value) === true) {
     lastName.style.display = "none";
     nameValid.style.border = "6px solid #279e7a";
-    return true;
+    return true
   } else {
 
     lastName.style.display = "block";
@@ -90,107 +95,135 @@ nameValid.addEventListener('change', () => {
     nameValid.style.border = "2px solid red";
     return false
   }
-})
+}
 
 
-// check mail
-mail.innerHTML = "";
-mailValid.addEventListener('change', () => {
+
+// check Mail
+function checkMail() {
+
+  const mailValid = document.getElementById('email');
+  const mailRegex = /^\S+@\S+\.\S+$/;
 
   if (mailRegex.test(mailValid.value) === true) {
     mail.style.display = "none";
     mailValid.style.border = "6px solid #279e7a";
-    return true;
+    return true
   } else {
     mail.style.display = "block";
     mail.innerHTML = "Veuillez rentre un mail valide";
     mailValid.style.border = "2px solid red";
     return false
   }
-})
+}
+
 
 
 // check Birth
-
-birth.innerHTML = "";
-birthValid.addEventListener('change', () => {
-  console.log(birthValid.value)
-
+function checkBirth() {
+  const birthValid = document.getElementById('birthdate');
+  const birthRegex = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
   if (birthRegex.test(birthValid.value) === true) {
     birth.style.display = "none"
     birthValid.style.border = "6px solid #279e7a";
-    return true;
+    return true
   } else {
     birth.style.display = "block";
     birth.innerHTML = "Veuillez rentre une date de naissance valide";
     birthValid.style.border = "2px solid red";
     return false
   }
+}
 
-})
 
 
 
 // check Concours
-cup.innerHTML = "";
-concoursValid.addEventListener('change', () => {
-
-
+function checkCup() {
+  const competitionRegex = /^[0-9]+$/;
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
     cup.style.display = "none";
     concoursValid.style.border = "6px solid #279e7a";
-    return true;
+    return true
   } else {
     cup.style.display = "block";
     cup.innerHTML = "Nombre ou donnée incorecte";
     concoursValid.style.border = "2px solid red";
     return false
   }
-})
+
+}
+
 
 
 // check Buttons 
+function checkButtons() {
+  const buttons = document.querySelectorAll('input[name="location"]');
+  let button = ""
+  for (let i = 0; i < buttons.length; i++) {
+    if (buttons[i].checked) {
+      button = buttons[i].value
+      return true
 
-
-location.innerHTML = "";
-const buttons = document.querySelectorAll('input[name="location"]');
-for (let button of buttons)
-  button.addEventListener("click", () => {
-    let selectedButton;
-    if (button.checked) {
-      selectedButton = button.value;
-      console.log(button.value)
-      location.innerHTML = "Champs valide";
     } else {
       location.innerHTML = "Vous devez choisir une ville";
 
     }
-  })
-
+  }
+}
 
 
 // check Conditions
-conditions.innerHtml = "";
-const condButtons = document.querySelectorAll('input[type="checkbox"]:checked');
-condButtonRequiredv.addEventListener("click", () => {
-  if (condButtonRequiredv.checked === true) {
+function checkConditions() {
+
+  const conditions = document.getElementById('conditions');
+
+  if (condButtonRequiredv.checked) {
     conditions.style.display = "none";
-  } else {
-    conditions.style.display = "block ";
-
+    return true
   }
+  conditions.style.display = "block ";
+}
 
-})
+
+
+// check Submit
+function validate() {
+  if (checkBirth() && checkButtons() && checkConditions() && checkCup() && checkFirstName() && checkName() && checkMail()) {
+    alert("tout est bon");
+    console.log(checkBirth)
+    return
+  } else {
+    alert("faux");
+  }
+}
+
+
+function listing() {
+  if (validate())
+    console.log('ok')
+}
 
 
 
 
 // check Event
+function setListeners() {
+  const firstNameValid = document.getElementById('first');
+  firstNameValid.addEventListener('change', checkFirstName);
+  const nameValid = document.getElementById('last');
+  nameValid.addEventListener('change', checkName);
+  const mailValid = document.getElementById('email');
+  mailValid.addEventListener('change', checkMail);
+  const birthValid = document.getElementById('birthdate');
+  birthValid.addEventListener('change', birthValid);
+  const concoursValid = document.getElementById('quantity');
+  concoursValid.addEventListener('change', checkCup);
+  const buttons = document.querySelectorAll('input[name="location"]');
+  buttons.forEach((button) => button.addEventListener('click', checkButtons));
+  const condButtons = document.querySelectorAll('input[type="checkbox"]:checked');
+  condButtonRequiredv.addEventListener("click", checkConditions);
+}
 
 
-
-// check Submit
-const submitButton = document.querySelector('.btn-submit').addEventListener("click", () => {
-  alert("Vous avez soumis le formulaire")
-})
-
+setListeners();
