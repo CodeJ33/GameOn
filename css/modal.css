@@ -512,6 +512,11 @@ input {
 .hero-section > .btn-signup {
   display: none;
 }
+
+.modalValidation {
+  display:none;
+}
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;
@@ -558,6 +563,9 @@ footer {
     margin: 32px auto 10px;
     padding: 12px 35px;
   }
+
+
+
   .copyrights {
     margin-top: 50px;
     text-align: center;
