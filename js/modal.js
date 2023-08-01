@@ -46,6 +46,9 @@ const conditions = document.getElementById('conditions');
 
 
 
+
+
+
 firstName.innerHTML = "";
 lastName.innerHTML = "";
 birth.innerHTML = "";
@@ -53,6 +56,8 @@ mail.innerHTML = "";
 location.innerHTML = "";
 cup.innerHTML = "";
 conditions.innerHtml = "";
+modalValidation.style.display = "none";
+
 condButtonRequiredv.checked === false;
 
 
@@ -71,7 +76,7 @@ function checkFirstName() {
   }
   else {
     firstName.style.display = "block";
-    firstName.innerHTML = "Veuillez rentrer deux caractères minimum";
+    firstName.innerHTML = "Veuillez rentrer deux caractères minimum et/ou un prénom valide";
     firstNameValid.style.border = "2px solid red";
     return false
   }
@@ -91,7 +96,7 @@ function checkName() {
   } else {
 
     lastName.style.display = "block";
-    lastName.innerHTML = "Veuillez rentrer deux caractères minimum";
+    lastName.innerHTML = "Veuillez rentrer deux caractères minimum et/ou un nom valide";
     nameValid.style.border = "2px solid red";
     return false
   }
@@ -142,12 +147,12 @@ function checkBirth() {
 function checkCup() {
   const competitionRegex = /^[0-9]+$/;
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
-    cup.style.display = "none";
+    cup.style.display = "block";
     concoursValid.style.border = "6px solid #279e7a";
     return true
   } else {
     cup.style.display = "block";
-    cup.innerHTML = "Nombre ou donnée incorecte";
+    cup.innerHTML = "Nombre ou donnée incorrecte";
     concoursValid.style.border = "2px solid red";
     return false
   }
@@ -185,24 +190,27 @@ function checkConditions() {
   conditions.style.display = "block ";
 }
 
+// thanks appear
+function launchThanks() {
+  modalValidation.style.display = "block";
 
+}
 
 // check Submit
 function validate() {
+  event.preventDefault();
   if (checkBirth() && checkButtons() && checkConditions() && checkCup() && checkFirstName() && checkName() && checkMail()) {
-    alert("tout est bon");
-    console.log(checkBirth)
-    return
+    launchThanks();
   } else {
-    alert("faux");
+    alert("Votre formulaire est incomplet ou des données sont incorrectes");
   }
 }
 
 
-function listing() {
-  if (validate())
-    console.log('ok')
-}
+
+
+
+
 
 
 
