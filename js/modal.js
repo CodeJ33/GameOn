@@ -46,6 +46,9 @@ const conditions = document.getElementById('conditions');
 
 
 
+
+
+
 firstName.innerHTML = "";
 lastName.innerHTML = "";
 birth.innerHTML = "";
@@ -53,6 +56,8 @@ mail.innerHTML = "";
 location.innerHTML = "";
 cup.innerHTML = "";
 conditions.innerHtml = "";
+modalValidation.style.display = "none";
+
 condButtonRequiredv.checked === false;
 
 
@@ -142,7 +147,7 @@ function checkBirth() {
 function checkCup() {
   const competitionRegex = /^[0-9]+$/;
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
-    cup.style.display = "none";
+    cup.style.display = "block";
     concoursValid.style.border = "6px solid #279e7a";
     return true
   } else {
@@ -185,18 +190,26 @@ function checkConditions() {
   conditions.style.display = "block ";
 }
 
+// thanks appear
+function launchThanks() {
+  modalValidation.style.display = "block";
 
+}
 
 // check Submit
 function validate() {
+  event.preventDefault();
   if (checkBirth() && checkButtons() && checkConditions() && checkCup() && checkFirstName() && checkName() && checkMail()) {
-    alert("tout est bon");
-    console.log(checkBirth)
-    return
+    launchThanks();
   } else {
     alert("Votre formulaire est incomplet ou des données sont incorrectes");
   }
 }
+
+
+
+
+
 
 
 
