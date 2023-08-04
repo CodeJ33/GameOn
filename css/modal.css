@@ -361,7 +361,8 @@ input {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -524,6 +525,15 @@ input {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  height:600px;
+  text-align:center;
+  margin:auto;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#thxmessage {
+  margin:10px;
 }
 
 footer {
