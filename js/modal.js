@@ -30,8 +30,18 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+// close validation
 
+let closeValidation = document.querySelector(".btn-close");
+console.log(closeValidation);
 
+closeValidation.addEventListener("click", closeModalValidation);
+
+function closeModalValidation() {
+  modalValidation.style.display = "none";
+  document.querySelector(".bground").innerHTML = "";
+
+}
 // Retrieve form fields
 
 const birthValid = document.getElementById('birthdate');
@@ -62,6 +72,10 @@ condButtonRequiredv.checked === false;
 
 
 let firstNamesubmit = ""
+let doc = [];
+const docu = Object.create(doc);
+console.log(docu)
+
 
 
 // check firstname
@@ -72,6 +86,8 @@ function checkFirstName() {
   if (nameRegex.test(firstNameValid.value) === true) {
     firstName.style.display = "none";
     firstNameValid.style.border = "6px solid #279e7a";
+    doc.push(firstNameValid.value);
+    console.log(doc)
     return true
   }
   else {
@@ -92,6 +108,7 @@ function checkName() {
   if (nameRegex.test(nameValid.value) === true) {
     lastName.style.display = "none";
     nameValid.style.border = "6px solid #279e7a";
+    doc.push(nameValid.value);
     return true
   } else {
 
@@ -113,6 +130,7 @@ function checkMail() {
   if (mailRegex.test(mailValid.value) === true) {
     mail.style.display = "none";
     mailValid.style.border = "6px solid #279e7a";
+    doc.push(mailValid.value);
     return true
   } else {
     mail.style.display = "block";
@@ -131,6 +149,7 @@ function checkBirth() {
   if (birthRegex.test(birthValid.value) === true) {
     birth.style.display = "none"
     birthValid.style.border = "6px solid #279e7a";
+    doc.push(birthValid.value);
     return true
   } else {
     birth.style.display = "block";
@@ -149,6 +168,7 @@ function checkCup() {
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
     cup.style.display = "block";
     concoursValid.style.border = "6px solid #279e7a";
+    doc.push(concoursValid.value);
     return true
   } else {
     cup.style.display = "block";
@@ -168,6 +188,7 @@ function checkButtons() {
   for (let i = 0; i < buttons.length; i++) {
     if (buttons[i].checked) {
       button = buttons[i].value
+      doc.push(button);
       return true
 
     } else {
@@ -192,7 +213,8 @@ function checkConditions() {
 
 // thanks appear
 function launchThanks() {
-  modalValidation.style.display = "block";
+  modalValidation.style.display = "flex";
+  document.querySelector(".modal-body").innerHTML = "";
 
 }
 
