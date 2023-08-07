@@ -30,8 +30,18 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
+// close validation
 
+let closeValidation = document.querySelector(".btn-close");
 
+closeValidation.addEventListener("click", closeModalValidation);
+
+function closeModalValidation() {
+  modalValidation.style.display = "none";
+  document.querySelector(".bground").innerHTML = "";
+  event.stopPropagation();
+
+}
 // Retrieve form fields
 
 const birthValid = document.getElementById('birthdate');
@@ -42,18 +52,16 @@ const lastName = document.getElementById('lastName');
 const birth = document.getElementById('birth');
 const mail = document.getElementById('mail');
 const cup = document.getElementById('cup');
+const town = document.getElementById('location');
 const conditions = document.getElementById('conditions');
-
-
-
-
+const submit = document.getElementById('btn-modalsubmit');
 
 
 firstName.innerHTML = "";
 lastName.innerHTML = "";
 birth.innerHTML = "";
 mail.innerHTML = "";
-location.innerHTML = "";
+town.innerHTML = "";
 cup.innerHTML = "";
 conditions.innerHtml = "";
 modalValidation.style.display = "none";
@@ -62,6 +70,10 @@ condButtonRequiredv.checked === false;
 
 
 let firstNamesubmit = ""
+let doc = {};
+const docu = Object.create(doc);
+console.log(docu)
+
 
 
 // check firstname
@@ -71,7 +83,9 @@ function checkFirstName() {
   const nameRegex = /^[a-zA-Z-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]{2,30}$/;
   if (nameRegex.test(firstNameValid.value) === true) {
     firstName.style.display = "none";
-    firstNameValid.style.border = "6px solid #279e7a";
+    firstNameValid.style.border = "2px solid #279e7a";
+    doc.firstName = firstNameValid.value;
+    console.log(doc)
     return true
   }
   else {
@@ -91,7 +105,8 @@ function checkName() {
 
   if (nameRegex.test(nameValid.value) === true) {
     lastName.style.display = "none";
-    nameValid.style.border = "6px solid #279e7a";
+    nameValid.style.border = "2px solid #279e7a";
+    doc.lastName = nameValid.value;
     return true
   } else {
 
@@ -112,11 +127,12 @@ function checkMail() {
 
   if (mailRegex.test(mailValid.value) === true) {
     mail.style.display = "none";
-    mailValid.style.border = "6px solid #279e7a";
+    mailValid.style.border = "2px solid #279e7a";
+    doc.mail = mailValid.value;
     return true
   } else {
     mail.style.display = "block";
-    mail.innerHTML = "Veuillez rentre un mail valide";
+    mail.innerHTML = "Veuillez rentrer un mail valide";
     mailValid.style.border = "2px solid red";
     return false
   }
@@ -127,14 +143,21 @@ function checkMail() {
 // check Birth
 function checkBirth() {
   const birthValid = document.getElementById('birthdate');
+
+  const birthDate = birthValid.value;
+  const birthDateValid = new Date(birthDate)
+  const minDate = new Date('2013-01-01');
+
   const birthRegex = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
-  if (birthRegex.test(birthValid.value) === true) {
+
+  if (birthRegex.test(birthValid.value) === true && birthDateValid <= minDate) {
     birth.style.display = "none"
-    birthValid.style.border = "6px solid #279e7a";
+    birthValid.style.border = "2px solid #279e7a";
+    doc.birth = birthValid.value;
     return true
   } else {
     birth.style.display = "block";
-    birth.innerHTML = "Veuillez rentre une date de naissance valide";
+    birth.innerHTML = "Veuillez rentrer une date de naissance valide";
     birthValid.style.border = "2px solid red";
     return false
   }
@@ -148,7 +171,8 @@ function checkCup() {
   const competitionRegex = /^[0-9]+$/;
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
     cup.style.display = "block";
-    concoursValid.style.border = "6px solid #279e7a";
+    concoursValid.style.border = "2px solid #279e7a";
+    doc.cup = concoursValid.value;
     return true
   } else {
     cup.style.display = "block";
@@ -164,16 +188,34 @@ function checkCup() {
 // check Buttons 
 function checkButtons() {
   const buttons = document.querySelectorAll('input[name="location"]');
-  let button = ""
-  for (let i = 0; i < buttons.length; i++) {
-    if (buttons[i].checked) {
-      button = buttons[i].value
-      return true
+  const buttonsDiv = document.querySelector('.locationChoice');
+  let nbrbuttons = buttons.length;
+  let buttonSelection = false;
+  if (nbrbuttons > 0) {
+    let i = 0;
+    buttonSelection = false;
+    while (i < nbrbuttons) {
 
-    } else {
-      location.innerHTML = "Vous devez choisir une ville";
-
+      if (buttons[i].checked) {
+        doc.location = buttons[i].value;
+        buttonsDiv.style.border = "2px solid #279e7a";
+        buttonSelection = true;
+      }
+      i = i + 1;
     }
+  }
+
+  if (!buttonSelection) {
+    town.style.display = "block";
+    town.innerHTML = "Veuillez choisir une ville";
+    buttonsDiv.style.border = "2px solid red";
+    return false;
+
+  }
+  else {
+    town.innerHTML = "";
+    return true;
+
   }
 }
 
@@ -182,32 +224,40 @@ function checkButtons() {
 function checkConditions() {
 
   const conditions = document.getElementById('conditions');
+  const conditionsDiv = document.querySelector('.checkbox');
 
   if (condButtonRequiredv.checked) {
     conditions.style.display = "none";
     return true
+  } else {
+    conditions.style.display = "block ";
+    conditions.innerHTML = "Vous devez accepter les conditions d'utilisation";
+    return false
   }
-  conditions.style.display = "block ";
 }
 
-// thanks appear
-function launchThanks() {
-  modalValidation.style.display = "block";
 
-}
 
 // check Submit
 function validate() {
   event.preventDefault();
-  if (checkBirth() && checkButtons() && checkConditions() && checkCup() && checkFirstName() && checkName() && checkMail()) {
+  if (checkCup() && checkFirstName() && checkName() && checkMail() && checkBirth() && checkButtons() && checkConditions()) {
     launchThanks();
   } else {
     alert("Votre formulaire est incomplet ou des données sont incorrectes");
+
   }
+  event.stopPropagation();
 }
 
 
 
+// thanks appear
+function launchThanks() {
+  modalValidation.style.display = "flex";
+  document.querySelector(".modal-body").innerHTML = "";
+
+}
 
 
 
@@ -224,14 +274,17 @@ function setListeners() {
   const mailValid = document.getElementById('email');
   mailValid.addEventListener('change', checkMail);
   const birthValid = document.getElementById('birthdate');
-  birthValid.addEventListener('change', birthValid);
+  birthValid.addEventListener('change', checkBirth);
   const concoursValid = document.getElementById('quantity');
   concoursValid.addEventListener('change', checkCup);
   const buttons = document.querySelectorAll('input[name="location"]');
   buttons.forEach((button) => button.addEventListener('click', checkButtons));
   const condButtons = document.querySelectorAll('input[type="checkbox"]:checked');
   condButtonRequiredv.addEventListener("click", checkConditions);
+  const submit = document.getElementById('btn-modalsubmit');
+  submit.addEventListener("click", validate);
 }
 
 
 setListeners();
+
