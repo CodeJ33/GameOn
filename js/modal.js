@@ -30,18 +30,22 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-// close validation
-
+/** 
+ * Selection du bouton pour fermer les remerciements
+ * Fonction qui ferme les remerciements 
+*/
 let closeValidation = document.querySelector(".btn-close");
 
 closeValidation.addEventListener("click", closeModalValidation);
 
+let closeBground = document.querySelector(".bground");
 function closeModalValidation() {
   modalValidation.style.display = "none";
   document.querySelector(".bground").innerHTML = "";
-  event.stopPropagation();
+  closeBground.style.display = "none";
 
 }
+
 // Retrieve form fields
 
 const birthValid = document.getElementById('birthdate');
@@ -56,7 +60,9 @@ const town = document.getElementById('location');
 const conditions = document.getElementById('conditions');
 const submit = document.getElementById('btn-modalsubmit');
 
-
+/**
+ * Champs d'erreur masqué
+ */
 firstName.innerHTML = "";
 lastName.innerHTML = "";
 birth.innerHTML = "";
@@ -65,18 +71,26 @@ town.innerHTML = "";
 cup.innerHTML = "";
 conditions.innerHtml = "";
 modalValidation.style.display = "none";
-
 condButtonRequiredv.checked === false;
-
-
 let firstNamesubmit = ""
+
+
+/**
+ * Création de l'objet qui contiendra toute les données saisies par l'utilisateur
+ * Affichage de l'objet dans la console
+ */
+
 let doc = {};
 const docu = Object.create(doc);
 console.log(docu)
 
 
 
-// check firstname
+/**
+ * Fonction qui vérifie qu'un prénom a été saisi.
+ * Le regex permet de s'assurer qu'il comporte bien deux lettres minimum sans chiffre ni caractères spéciaux.
+ * Sinon la zone est entourée en rouge
+ */
 function checkFirstName() {
 
   const firstNameValid = document.getElementById('first');
@@ -96,8 +110,11 @@ function checkFirstName() {
   }
 }
 
-
-// check name
+/**
+ * Fonction qui vérifie qu'un nom a été saisi.
+ * Le regex permet de s'assurer qu'il comporte bien deux lettres minimum sans chiffre ni caractères spéciaux.
+ * Sinon la zone est entourée en rouge
+ */
 
 function checkName() {
   const nameValid = document.getElementById('last');
@@ -118,8 +135,12 @@ function checkName() {
 }
 
 
+/**
+ * Fonction qui vérifie qu'un mail a été saisi.
+ * Le regex permet de s'assurer que c'est une date au bon format.
+ * Sinon la zone est entourée en rouge
+ */
 
-// check Mail
 function checkMail() {
 
   const mailValid = document.getElementById('email');
@@ -140,7 +161,11 @@ function checkMail() {
 
 
 
-// check Birth
+/**
+ * Fonction qui vérifie qu'il y a une date qui a été rentré et qui correspond à l'age de 10 ans minimum
+ * Le regex permet de s'assurer que c'est une date au bon format
+ * Sinon la zone est entourée en rouge
+ */
 function checkBirth() {
   const birthValid = document.getElementById('birthdate');
 
@@ -166,9 +191,14 @@ function checkBirth() {
 
 
 
-// check Concours
+/**
+ * Fonction qui vérifie qu'il y a bien un nombre qui a été entré et pas plus de 99.
+ * Le regex permet de s'assurer que c'est un nombre
+ * Sinon la zone est entourée en rouge
+ */
 function checkCup() {
   const competitionRegex = /^[0-9]+$/;
+
   if (competitionRegex.test(concoursValid.value) === true && concoursValid.value <= 99) {
     cup.style.display = "block";
     concoursValid.style.border = "2px solid #279e7a";
@@ -185,7 +215,10 @@ function checkCup() {
 
 
 
-// check Buttons 
+/**
+ * Fonction qui vérifie qu'il y a bien une ville qui a été coché
+ * Sinon la zone est entourée en rouge
+ */
 function checkButtons() {
   const buttons = document.querySelectorAll('input[name="location"]');
   const buttonsDiv = document.querySelector('.locationChoice');
@@ -220,7 +253,10 @@ function checkButtons() {
 }
 
 
-// check Conditions
+/**
+ * Fonction qui vérifie si les conditions d'utilisation sont bien cochées ce qui est impératif
+ * Sinon il y a une indication comme quoi il faut accepter les conditions d'utilisation
+ */
 function checkConditions() {
 
   const conditions = document.getElementById('conditions');
@@ -238,7 +274,10 @@ function checkConditions() {
 
 
 
-// check Submit
+/** 
+*Fonction de validation du formulaire
+*Celle ci utilise toutes les fonctions précédentes pour vérifier si tout les champs sont valables
+*/
 function validate() {
   event.preventDefault();
   if (checkCup() && checkFirstName() && checkName() && checkMail() && checkBirth() && checkButtons() && checkConditions()) {
@@ -252,7 +291,9 @@ function validate() {
 
 
 
-// thanks appear
+/** 
+* Fonction qui fait apparaitre le remerciement pour l'inscription
+*/
 function launchThanks() {
   modalValidation.style.display = "flex";
   document.querySelector(".modal-body").innerHTML = "";
@@ -264,8 +305,10 @@ function launchThanks() {
 
 
 
-
-// check Event
+/**
+ * On récupère les élements 
+ * On place ainsi les écouteurs d'évènements 
+ */
 function setListeners() {
   const firstNameValid = document.getElementById('first');
   firstNameValid.addEventListener('change', checkFirstName);
@@ -287,4 +330,5 @@ function setListeners() {
 
 
 setListeners();
+
 
