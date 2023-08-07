@@ -111,7 +111,11 @@ img {
     font-weight: normal;
     font-size: 13px;
 }
-}
+
+  }
+
+
+
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -598,5 +602,11 @@ footer {
   }
   to {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .content {
+    margin:25% auto;
   }
 }
