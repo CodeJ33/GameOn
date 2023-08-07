@@ -111,7 +111,7 @@
                   id="birthdate"
                   name="birthdate"
                   autocomplete="off"
-                  required-max="2008-12-31"
+                
                   placeholder="Ex: 2008/10/05"
                   
                 /><br>
@@ -203,20 +203,21 @@
                   id="checkbox1"
                   
                 />
-                <label class="checkbox2-label" for="checkbox1" unchecked>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2"  >
-                  <span class="checkbox-icon" checked="checked"></span>
+                  <span class="checkbox-icon" ></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
-                <div id="conditions" class="text-danger">"Vous devez accepter les conditions d'utilisation</div>
+                <div id="conditions" class="text-danger"></div>
                 <br>
               </div>
               <input
+                id="btn-modalsubmit"
                 class="btn-submit"
                 type="submit"
                 class="button"
