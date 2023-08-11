@@ -1,3 +1,9 @@
+/**
+ * @author Julian Ané <https://github.com/CodeJ33>
+ */
+
+
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -31,8 +37,10 @@ function closeModal() {
 }
 
 /** 
- * Selection du bouton pour fermer les remerciements
- * Fonction qui ferme les remerciements 
+ * @function closeModalValidation
+ * @description Fonction qui ferme les remerciements 
+ *  Selection du bouton pour fermer les remerciements
+ * 
 */
 let closeValidation = document.querySelector(".btn-close");
 
@@ -43,7 +51,7 @@ function closeModalValidation() {
   modalValidation.style.display = "none";
   document.querySelector(".bground").innerHTML = "";
   closeBground.style.display = "none";
-
+  window.location.reload();
 }
 
 // Retrieve form fields
@@ -87,7 +95,8 @@ console.log(docu)
 
 
 /**
- * Fonction qui vérifie qu'un prénom a été saisi.
+ * @function checkFirstName
+ * @ description Fonction qui vérifie qu'un prénom a été saisi.
  * Le regex permet de s'assurer qu'il comporte bien deux lettres minimum sans chiffre ni caractères spéciaux.
  * Sinon la zone est entourée en rouge
  */
@@ -111,7 +120,9 @@ function checkFirstName() {
 }
 
 /**
- * Fonction qui vérifie qu'un nom a été saisi.
+ * @function checkName
+ * @description Fonction qui vérifie qu'un nom a été saisi.
+ * 
  * Le regex permet de s'assurer qu'il comporte bien deux lettres minimum sans chiffre ni caractères spéciaux.
  * Sinon la zone est entourée en rouge
  */
@@ -136,7 +147,9 @@ function checkName() {
 
 
 /**
- * Fonction qui vérifie qu'un mail a été saisi.
+ * @function checkMail
+ * @description Fonction qui vérifie qu'un mail a été saisi.
+ * 
  * Le regex permet de s'assurer que c'est une date au bon format.
  * Sinon la zone est entourée en rouge
  */
@@ -162,7 +175,9 @@ function checkMail() {
 
 
 /**
- * Fonction qui vérifie qu'il y a une date qui a été rentré et qui correspond à l'age de 10 ans minimum
+ * @function checkBirth
+ * @description Fonction qui vérifie qu'il y a une date qui a été rentré et qui correspond à l'age de 10 ans minimum
+ *
  * Le regex permet de s'assurer que c'est une date au bon format
  * Sinon la zone est entourée en rouge
  */
@@ -192,7 +207,9 @@ function checkBirth() {
 
 
 /**
- * Fonction qui vérifie qu'il y a bien un nombre qui a été entré et pas plus de 99.
+ * @function checkCup
+ * @description Fonction qui vérifie qu'il y a bien un nombre qui a été entré et pas plus de 99
+ * 
  * Le regex permet de s'assurer que c'est un nombre
  * Sinon la zone est entourée en rouge
  */
@@ -216,8 +233,10 @@ function checkCup() {
 
 
 /**
- * Fonction qui vérifie qu'il y a bien une ville qui a été coché
- * Sinon la zone est entourée en rouge
+ * @function checkButtons
+ * @description Fonction qui vérifie qu'il y a bien une ville qui a été coché
+ * 
+ * 
  */
 function checkButtons() {
   const buttons = document.querySelectorAll('input[name="location"]');
@@ -254,6 +273,8 @@ function checkButtons() {
 
 
 /**
+ * @function checkConditions
+ * @description
  * Fonction qui vérifie si les conditions d'utilisation sont bien cochées ce qui est impératif
  * Sinon il y a une indication comme quoi il faut accepter les conditions d'utilisation
  */
@@ -275,6 +296,8 @@ function checkConditions() {
 
 
 /** 
+ * @function validate
+ * @description 
 *Fonction de validation du formulaire
 *Celle ci utilise toutes les fonctions précédentes pour vérifier si tout les champs sont valables
 */
@@ -292,6 +315,8 @@ function validate(event) {
 
 
 /** 
+ * @function launchThanks
+ * @description
 * Fonction qui fait apparaitre le remerciement pour l'inscription
 */
 function launchThanks() {
@@ -306,6 +331,8 @@ function launchThanks() {
 
 
 /**
+ * @function setListeners
+ * @description
  * On récupère les élements 
  * On place ainsi les écouteurs d'évènements 
  */
