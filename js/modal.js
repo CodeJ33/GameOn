@@ -170,12 +170,12 @@ function checkBirth() {
   const birthValid = document.getElementById('birthdate');
 
   const birthDate = birthValid.value;
-  const birthDateValid = new Date(birthDate)
-  const minDate = new Date('2013-01-01');
-
+  const birthDateValid = new Date(birthDate).getTime();
+  const nowDate = Date.now();
+  const tenYearsEarliest = nowDate - 10 * 360 * 24 * 60 * 60 * 1000;
   const birthRegex = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
 
-  if (birthRegex.test(birthValid.value) === true && birthDateValid <= minDate) {
+  if (birthRegex.test(birthValid.value) === true && birthDateValid <= tenYearsEarliest) {
     birth.style.display = "none"
     birthValid.style.border = "2px solid #279e7a";
     doc.birth = birthValid.value;
@@ -278,7 +278,7 @@ function checkConditions() {
 *Fonction de validation du formulaire
 *Celle ci utilise toutes les fonctions précédentes pour vérifier si tout les champs sont valables
 */
-function validate() {
+function validate(event) {
   event.preventDefault();
   if (checkCup() && checkFirstName() && checkName() && checkMail() && checkBirth() && checkButtons() && checkConditions()) {
     launchThanks();
