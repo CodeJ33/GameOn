@@ -1,3 +1,5 @@
+
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -45,8 +47,9 @@ function closeModal() {
 
 /** 
  * @function closeModalValidation
- * @description Fonction qui ferme les remerciements avec le bouton fermer et la croix
+ * @description Fonction qui ferme les remerciements 
  *  Selection du bouton pour fermer les remerciements
+ * 
 */
 let closeValidation = document.querySelector(".btn-close");
 closeValidation.addEventListener("click", closeModalValidation);
@@ -292,7 +295,7 @@ function checkButtons() {
 function checkConditions() {
 
   const conditions = document.getElementById('conditions');
-
+  const conditionsDiv = document.querySelector('.checkbox');
 
   if (condButtonRequiredv.checked) {
     conditions.style.display = "none";
@@ -337,10 +340,9 @@ function launchThanks() {
 
 
 
-
 /**
  * @function setListeners
- * @description Fonction pour récupérer/écouter les évènements
+ * @description Fonction pour récupérer les évènements
  */
 function setListeners() {
   const firstNameValid = document.getElementById('first');
@@ -355,14 +357,12 @@ function setListeners() {
   concoursValid.addEventListener('change', checkCup);
   const buttons = document.querySelectorAll('input[name="location"]');
   buttons.forEach((button) => button.addEventListener('click', checkButtons));
+  const condButtons = document.querySelectorAll('input[type="checkbox"]:checked');
   condButtonRequiredv.addEventListener("click", checkConditions);
   const submit = document.getElementById('btn-modalsubmit');
   submit.addEventListener("click", validate);
 }
 
-/**
- * @description Appel de la fonction 
- */
-setListeners();
 
+setListeners();
 
