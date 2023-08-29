@@ -1,5 +1,3 @@
-
-
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -49,7 +47,6 @@ function closeModal() {
  * @function closeModalValidation
  * @description Fonction qui ferme les remerciements avec le bouton fermer et la croix
  *  Selection du bouton pour fermer les remerciements
- * 
 */
 let closeValidation = document.querySelector(".btn-close");
 closeValidation.addEventListener("click", closeModalValidation);
@@ -364,7 +361,7 @@ function setListeners() {
 }
 
 /**
- * @description Appel de la fonction setListeners
+ * @description Appel de la fonction 
  */
 setListeners();
 
